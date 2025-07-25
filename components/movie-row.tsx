@@ -85,7 +85,11 @@ export function MovieRow({ title, movies, icon }: MovieRowProps) {
         )}
       </div>
 
-      <div className="relative overflow-x-auto" ref={containerRef}>
+     <div
+  ref={containerRef}
+  className="relative overflow-hidden md:overflow-x-hidden overflow-x-auto"
+>
+
         <motion.div
           className="flex gap-4"
           animate={{ x: -scrollPosition }}
