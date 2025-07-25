@@ -1,8 +1,7 @@
 "use client"
 
 import type React from "react"
-
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { motion } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -25,19 +24,32 @@ interface MovieRowProps {
 
 export function MovieRow({ title, movies, icon }: MovieRowProps) {
   const [scrollPosition, setScrollPosition] = useState(0)
+  const [containerWidth, setContainerWidth] = useState(0)
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  const containerWidth = 1200
   const itemWidth = 200
   const maxScroll = Math.max(0, movies.length * itemWidth - containerWidth)
 
   const scroll = (direction: "left" | "right") => {
-    const scrollAmount = 600
+    const scrollAmount = containerWidth * 0.8
     if (direction === "left") {
       setScrollPosition(Math.max(0, scrollPosition - scrollAmount))
     } else {
       setScrollPosition(Math.min(maxScroll, scrollPosition + scrollAmount))
     }
   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.offsetWidth)
+      }
+    }
+
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
   if (movies.length === 0) return null
 
@@ -48,7 +60,8 @@ export function MovieRow({ title, movies, icon }: MovieRowProps) {
           {icon}
           <h2 className="text-2xl font-bold">{title}</h2>
         </div>
-        {movies.length > 6 && (
+        {/* Hide arrows on mobile */}
+        {movies.length > 2 && containerWidth > 768 && (
           <div className="flex gap-2">
             <Button
               variant="outline"
@@ -71,11 +84,13 @@ export function MovieRow({ title, movies, icon }: MovieRowProps) {
           </div>
         )}
       </div>
-      <div className="relative overflow-hidden">
+
+      <div className="relative overflow-x-auto" ref={containerRef}>
         <motion.div
           className="flex gap-4"
           animate={{ x: -scrollPosition }}
           transition={{ duration: 0.3, ease: "easeOut" }}
+          style={{ minWidth: "fit-content" }}
         >
           {movies.map((movie, index) => (
             <div key={movie.id} className="flex-shrink-0 w-48">
