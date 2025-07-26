@@ -2,7 +2,7 @@
 
 A modern, Netflix-inspired movie streaming web application built with Next.js 15, TypeScript, and Tailwind CSS. Features a custom video player, advanced search functionality, and a responsive design with dark mode support.
 
-![CineStream Preview](https://via.placeholder.com/800x400/1a1a1a/ffffff?text=CineStream+Preview)
+
 
 ## ✨ Features
 
@@ -51,4 +51,12 @@ A modern, Netflix-inspired movie streaming web application built with Next.js 15
 
 ## 🚀 Getting Started
 
-
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the frontend development server:
+   ```bash
+   npm run dev
+   ```
+3. The frontend will be available at `http://localhost:3000`
