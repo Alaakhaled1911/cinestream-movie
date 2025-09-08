@@ -4,6 +4,7 @@ A modern, Netflix-inspired movie streaming web application built with Next.js 15
 
 
 
+
 ## ✨ Features
 
 ### 🎥 Video Streaming
