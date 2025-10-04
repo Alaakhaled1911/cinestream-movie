@@ -153,17 +153,20 @@ export default function MoviePage() {
       {/* Video Player */}
       <section className="relative bg-black">
         <div
-          className="relative aspect-video group cursor-pointer"
+          className="relative aspect-video group"
           onMouseEnter={() => setShowControls(true)}
           onMouseLeave={() => setShowControls(false)}
+          onClick={togglePlay}
+          style={{ cursor: "pointer" }}
         >
           <video
             ref={videoRef}
             className="w-full h-full"
             poster={movie.backdrop}
-            onClick={togglePlay}
             crossOrigin="anonymous"
             preload="metadata"
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
           >
             <source src={movie.videoUrl} type="video/mp4" />
             <source
@@ -183,10 +186,22 @@ export default function MoviePage() {
             transition={{ duration: 0.3 }}
           >
             {/* Play/Pause Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div initial={{ scale: 0 }} animate={{ scale: isPlaying ? 0 : 1 }} transition={{ duration: 0.2 }}>
-                <Button size="icon" className="w-16 h-16 rounded-full bg-white/20 hover:bg-white/30">
-                  <Play className="w-8 h-8 text-white" />
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: isPlaying ? 0 : 1 }}
+                transition={{ duration: 0.2 }}
+                className="pointer-events-auto"
+              >
+                <Button
+                  size="icon"
+                  className="w-16 h-16 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    togglePlay()
+                  }}
+                >
+                  <Play className="w-8 h-8 text-white fill-white" />
                 </Button>
               </motion.div>
             </div>
