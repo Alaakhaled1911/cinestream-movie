@@ -1,6 +1,6 @@
 # 🎬 CineStream - Movie Streaming Platform
 
-A modern, Netflix-inspired movie streaming web application built with Next.js 15, TypeScript, and Tailwind CSS. Features a custom video player, advanced search functionality, and a responsive design with dark mode support
+A modern, Netflix-inspired movie streaming web application built with Next.js 15, TypeScript, and Tailwind CSS. Features a custom video player, advanced search functionality, and a responsive design with dark mode support.
 
 
 
