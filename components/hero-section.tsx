@@ -85,7 +85,7 @@ const MovieMetadata = ({ movie }: { movie: Movie }) => (
 )
 
 const WatchButton = ({ movieId }: { movieId: string }) => (
-  <Button asChild size="lg" className="gap-2 text-lg px-8 py-3">
+  <Button asChild size="lg" className="gap-2 text-lg px-8 py-3 mb-5">
     <Link href={`/movie/${movieId}`}>
       <Play className="w-6 h-6" />
       Watch Now
@@ -116,7 +116,7 @@ const MovieIndicators = ({
   currentFeaturedIndex: number
   onIndicatorClick: (index: number) => void
 }) => (
-  <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
+  <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex gap-2">
     {featuredMovies.map((_, index) => (
       <button
         key={index}
